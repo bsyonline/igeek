@@ -28,7 +28,7 @@ import java.util.Date;
 public class UploadController {
 
     @RequestMapping("/upload2")
-    public ModelAndView upload(MultipartFile file, HttpServletRequest request, HttpServletResponse response){
+    public ModelAndView upload(MultipartFile file, HttpServletRequest request, HttpServletResponse response) {
         String path = request.getSession().getServletContext().getRealPath("/upload/temp/");
         //String path = request.getContextPath();
         response.setContentType("application/json");
@@ -37,7 +37,7 @@ public class UploadController {
 
         String fileName = file.getOriginalFilename();
 
-        String name = fileName.substring(0,fileName.lastIndexOf("."));
+        String name = fileName.substring(0, fileName.lastIndexOf("."));
         String ext = fileName.substring(fileName.lastIndexOf("."));
         Date date = new Date();
         Long l = date.getTime();
@@ -47,7 +47,7 @@ public class UploadController {
         //path = path + File.separator + "upload" + File.separator + "temp" + File.separator;
 
         File dir = new File(path);
-        if(!dir.exists()){
+        if (!dir.exists()) {
             dir.mkdirs();
         }
 
@@ -57,7 +57,7 @@ public class UploadController {
             e.printStackTrace();
         }
 
-        String json = "{\"name\":\""+newFileName+"\"}";
+        String json = "{\"name\":\"" + newFileName + "\"}";
 
         PrintWriter out = null;
         try {
