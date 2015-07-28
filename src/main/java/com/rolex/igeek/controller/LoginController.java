@@ -33,20 +33,20 @@ public class LoginController {
     private UserDao userDao;
 
     @RequestMapping("/login")
-    public ModelAndView login(){
+    public ModelAndView login() {
         return new ModelAndView("forward:/jsp/login.jsp");
     }
 
     @RequestMapping("/session")
-    public ModelAndView session(HttpServletRequest request,String username,String password){
+    public ModelAndView session(HttpServletRequest request, String username, String password) {
 
         List<User> users = userDao.findByName(username);
-        if(users != null && users.size() > 0){
+        if (users != null && users.size() > 0) {
             User user = users.get(0);
-            if(user.getPassword().equals(MD5.encrypt(password))){
-                request.getSession().setAttribute("LOGIN_USER",user);
-                Map<Menu,List<Menu>> map = (Map<Menu,List<Menu>>)request.getSession().getServletContext().getAttribute("MENU_MAP");
-                return new ModelAndView("/jsp/dashboard","map",map);
+            if (user.getPassword().equals(MD5.encrypt(password))) {
+                request.getSession().setAttribute("LOGIN_USER", user);
+                Map<Menu, List<Menu>> map = (Map<Menu, List<Menu>>) request.getSession().getServletContext().getAttribute("MENU_MAP");
+                return new ModelAndView("/jsp/dashboard", "map", map);
             }
         }
         return new ModelAndView("/jsp/login");

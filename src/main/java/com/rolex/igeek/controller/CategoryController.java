@@ -33,36 +33,36 @@ public class CategoryController {
     @Resource
     private CategoryDao categoryDao;
 
-    @RequestMapping(value="/category/saveOrUpdate",method = RequestMethod.POST)
-    public ModelAndView saveOrUpdate(Category category){
+    @RequestMapping(value = "/category/saveOrUpdate", method = RequestMethod.POST)
+    public ModelAndView saveOrUpdate(Category category) {
         //System.out.println("id="+ category.getId() + ",name=" + category.getName());
-        if(category.getId() == null){
+        if (category.getId() == null) {
             categoryDao.save(category);
-        }else{
+        } else {
             categoryDao.update(category);
         }
         return new ModelAndView("redirect:/category/list");
     }
 
     @RequestMapping("/category/list")
-    public ModelAndView list(){
+    public ModelAndView list() {
         List<Category> list = categoryDao.findAll();
-        return new ModelAndView("/jsp/category/list","list",list);
+        return new ModelAndView("/jsp/category/list", "list", list);
     }
 
-    @RequestMapping(value="/category/update/{id}",method = RequestMethod.GET)
-    public ModelAndView update(@PathVariable Integer id){
+    @RequestMapping(value = "/category/update/{id}", method = RequestMethod.GET)
+    public ModelAndView update(@PathVariable Integer id) {
         Category category = categoryDao.findById(id);
-        return new ModelAndView("/jsp/category/add","category",category);
+        return new ModelAndView("/jsp/category/add", "category", category);
     }
 
-    @RequestMapping(value="/category/add",method = RequestMethod.GET)
-    public ModelAndView add(){
+    @RequestMapping(value = "/category/add", method = RequestMethod.GET)
+    public ModelAndView add() {
         return new ModelAndView("/jsp/category/add");
     }
 
-    @RequestMapping(value="/category/delete/{id}",method = RequestMethod.GET)
-    public ModelAndView delete(@PathVariable Integer id){
+    @RequestMapping(value = "/category/delete/{id}", method = RequestMethod.GET)
+    public ModelAndView delete(@PathVariable Integer id) {
         //System.out.println("id="+ category.getId() + ",name=" + category.getName());
         Category category = categoryDao.findById(id);
         categoryDao.delete(category);
@@ -70,8 +70,8 @@ public class CategoryController {
     }
 
     @RequestMapping(value = "category/view/{id}", method = RequestMethod.GET)
-    public ModelAndView view(@PathVariable Integer id){
+    public ModelAndView view(@PathVariable Integer id) {
         Category category = categoryDao.findById(id);
-        return new ModelAndView("/jsp/category/view","category",category);
+        return new ModelAndView("/jsp/category/view", "category", category);
     }
 }

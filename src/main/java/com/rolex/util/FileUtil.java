@@ -17,15 +17,15 @@ import java.io.IOException;
  */
 public class FileUtil {
 
-    public static void moveFile(String src,String dest){
+    public static void moveFile(String src, String dest) {
         try {
-            FileUtils.copyFileToDirectory(new File(src),new File(dest));
+            FileUtils.copyFileToDirectory(new File(src), new File(dest));
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public static void removeFile(String path){
+    public static void removeFile(String path) {
         try {
             File file = new File(path);
             file.delete();

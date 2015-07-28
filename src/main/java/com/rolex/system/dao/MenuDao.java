@@ -19,10 +19,10 @@ import java.util.List;
 @Repository
 public class MenuDao extends BaseDao {
 
-    public List<Menu> findMenusByParent(int pid){
-        if(pid == 0){
+    public List<Menu> findMenusByParent(int pid) {
+        if (pid == 0) {
             return getHibernateTemplate().find("from Menu m where m.parent is null order by m.order asc");
-        }else {
+        } else {
             return getHibernateTemplate().find("from Menu m where m.parent.id=" + pid + " order by m.order asc");
         }
     }

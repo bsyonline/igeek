@@ -30,13 +30,11 @@ public class MD5 {
             for (byte element : hash) {
                 if ((0xff & element) < 0x10) {
                     hexString.append('0').append(Integer.toHexString((0xFF & element)));
-                }
-                else {
+                } else {
                     hexString.append(Integer.toHexString(0xFF & element));
                 }
             }
-        }
-        catch (NoSuchAlgorithmException e) {
+        } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException(e);
         }
 

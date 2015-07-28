@@ -17,29 +17,29 @@ import java.util.List;
  * version: 1.0
  */
 @Repository
-public class UserDao extends BaseDao{
+public class UserDao extends BaseDao {
 
-    public void save(User user){
+    public void save(User user) {
         getHibernateTemplate().save(user);
     }
 
-    public List<User> findByName(String username){
-        return getHibernateTemplate().find("from User u where u.username='"+username+"'");
+    public List<User> findByName(String username) {
+        return getHibernateTemplate().find("from User u where u.username='" + username + "'");
     }
 
-    public void update(User user){
+    public void update(User user) {
         getHibernateTemplate().update(user);
     }
 
-    public void delete(User user){
+    public void delete(User user) {
         getHibernateTemplate().delete(user);
     }
 
-    public User findById(int id){
-        return getHibernateTemplate().get(User.class,id);
+    public User findById(int id) {
+        return getHibernateTemplate().get(User.class, id);
     }
 
-    public List<User> findAll(){
+    public List<User> findAll() {
         return getHibernateTemplate().find("from User c");
     }
 }

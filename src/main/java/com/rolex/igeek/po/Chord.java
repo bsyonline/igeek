@@ -15,13 +15,13 @@ import java.io.Serializable;
  */
 @Entity
 @Table(name = "igeek_chord")
-public class Chord implements Serializable{
+public class Chord implements Serializable {
 
     @Id
     @GeneratedValue
     private Integer id;
     private String name;
-    @Column(name="`desc`")
+    @Column(name = "`desc`")
     private String desc;
     private String icon;
     private String level;

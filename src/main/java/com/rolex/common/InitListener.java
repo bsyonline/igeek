@@ -27,19 +27,19 @@ public class InitListener implements ServletContextListener {
 
         System.out.println("---------init load dict data----------");
         ApplicationContext act = WebApplicationContextUtils.getWebApplicationContext(sce.getServletContext());
-        MenuDao menuDao = (MenuDao)act.getBean("menuDao");
-        Map<Menu,List<Menu>> map = new TreeMap<Menu, List<Menu>>();
+        MenuDao menuDao = (MenuDao) act.getBean("menuDao");
+        Map<Menu, List<Menu>> map = new TreeMap<Menu, List<Menu>>();
         List<Menu> parents = menuDao.findMenusByParent(0);
-        if(parents != null && parents.size() > 0) {
+        if (parents != null && parents.size() > 0) {
             for (Menu m : parents) {
                 List<Menu> children = menuDao.findMenusByParent(m.getId());
                 map.put(m, children);
             }
             sce.getServletContext().setAttribute("MENU_MAP", map);
         }
-        DictDao dictDao = (DictDao)act.getBean("dictDao");
+        DictDao dictDao = (DictDao) act.getBean("dictDao");
         List<String> dicts = dictDao.findKeys();
-        if(dicts != null && dicts.size() > 0) {
+        if (dicts != null && dicts.size() > 0) {
             Map<String, List<Dict>> dictMap = new TreeMap<String, List<Dict>>();
             for (String d : dicts) {
                 List<Dict> ds = dictDao.findValues(d);

@@ -23,7 +23,7 @@ public class Key {
     private Integer id;
     private String name;
 
-    @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL,mappedBy = "key")
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "key")
     private Set<Chord> chords;
 
     public Integer getId() {

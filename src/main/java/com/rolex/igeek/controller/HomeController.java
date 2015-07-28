@@ -25,7 +25,7 @@ public class HomeController {
     private ChordDao chordDao;
 
     @RequestMapping("/home")
-    public ModelAndView home(){
+    public ModelAndView home() {
 
         Chord chord = chordDao.findById(1);
 

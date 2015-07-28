@@ -19,41 +19,41 @@ import java.util.List;
  * version: 1.0
  */
 @Repository
-public class ScoreDao extends BaseDao{
+public class ScoreDao extends BaseDao {
 
-    public void save(Score score){
+    public void save(Score score) {
         getHibernateTemplate().save(score);
     }
 
-    public Score findById(int id){
-        return getHibernateTemplate().get(Score.class,id);
+    public Score findById(int id) {
+        return getHibernateTemplate().get(Score.class, id);
     }
 
-    public List<Score> findAll(){
+    public List<Score> findAll() {
         return getHibernateTemplate().find("from Score c");
     }
 
-    public void update(Score score){
+    public void update(Score score) {
         getHibernateTemplate().update(score);
     }
 
-    public void delete(Score score){
+    public void delete(Score score) {
         getHibernateTemplate().delete(score);
     }
 
     public Integer findMaxId() {
         Session session = getHibernateTemplate().getSessionFactory().openSession();
         Query query = session.createSQLQuery("select max(id) from igeek_score");
-        return (Integer)query.uniqueResult();
+        return (Integer) query.uniqueResult();
     }
 
-    public List<Score> findRange(Integer from, Integer to){
+    public List<Score> findRange(Integer from, Integer to) {
         if (from < 0) {
             throw new IllegalArgumentException("The fromID < 0 is not allowed.");
         }
         if (to < from) {
             throw new IllegalArgumentException("toID < fromID is not allowed.");
         }
-        return getHibernateTemplate().find("from Score c where c.id>=" + from + " and c.id <= " + to + " order by c.id asc " );
+        return getHibernateTemplate().find("from Score c where c.id>=" + from + " and c.id <= " + to + " order by c.id asc ");
     }
 }

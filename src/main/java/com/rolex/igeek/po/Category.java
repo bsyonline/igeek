@@ -16,14 +16,14 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "igeek_category")
-public class Category implements Serializable{
+public class Category implements Serializable {
 
     @Id
     @GeneratedValue
     private Integer id;
     private String name;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL,mappedBy = "category")
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "category")
     private Set<Chord> chords;
 
     public Integer getId() {

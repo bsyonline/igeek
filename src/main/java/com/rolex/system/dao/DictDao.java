@@ -20,11 +20,11 @@ import java.util.List;
 @Repository
 public class DictDao extends BaseDao {
 
-    public List<String> findKeys(){
+    public List<String> findKeys() {
         return getHibernateTemplate().find("select distinct d.name from Dict d");
     }
 
-    public List<Dict> findValues(String key){
-        return getHibernateTemplate().find("from Dict d where d.name='"+key+"'");
+    public List<Dict> findValues(String key) {
+        return getHibernateTemplate().find("from Dict d where d.name='" + key + "'");
     }
 }

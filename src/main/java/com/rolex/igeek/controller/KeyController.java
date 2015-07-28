@@ -29,36 +29,36 @@ public class KeyController {
     @Resource
     private KeyDao keyDao;
 
-    @RequestMapping(value="/saveOrUpdate",method = RequestMethod.POST)
-    public ModelAndView saveOrUpdate(Key key){
+    @RequestMapping(value = "/saveOrUpdate", method = RequestMethod.POST)
+    public ModelAndView saveOrUpdate(Key key) {
         //System.out.println("id="+ key.getId() + ",name=" + key.getName());
-        if(key.getId() == null){
+        if (key.getId() == null) {
             keyDao.save(key);
-        }else{
+        } else {
             keyDao.update(key);
         }
         return new ModelAndView("redirect:/key/list");
     }
 
     @RequestMapping("/list")
-    public ModelAndView list(){
+    public ModelAndView list() {
         List<Key> list = keyDao.findAll();
-        return new ModelAndView("/jsp/key/list","list",list);
+        return new ModelAndView("/jsp/key/list", "list", list);
     }
 
-    @RequestMapping(value="/update/{id}",method = RequestMethod.GET)
-    public ModelAndView update(@PathVariable Integer id){
+    @RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
+    public ModelAndView update(@PathVariable Integer id) {
         Key key = keyDao.findById(id);
-        return new ModelAndView("/jsp/key/add","key",key);
+        return new ModelAndView("/jsp/key/add", "key", key);
     }
 
-    @RequestMapping(value="/add",method = RequestMethod.GET)
-    public ModelAndView add(){
+    @RequestMapping(value = "/add", method = RequestMethod.GET)
+    public ModelAndView add() {
         return new ModelAndView("/jsp/key/add");
     }
 
-    @RequestMapping(value="/delete/{id}",method = RequestMethod.GET)
-    public ModelAndView delete(@PathVariable Integer id){
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+    public ModelAndView delete(@PathVariable Integer id) {
         //System.out.println("id="+ key.getId() + ",name=" + key.getName());
         Key key = keyDao.findById(id);
         keyDao.delete(key);

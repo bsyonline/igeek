@@ -27,36 +27,36 @@ public class UserController {
     @Resource
     private UserDao userDao;
 
-    @RequestMapping(value="/user/saveOrUpdate",method = RequestMethod.POST)
-    public ModelAndView saveOrUpdate(User user){
+    @RequestMapping(value = "/user/saveOrUpdate", method = RequestMethod.POST)
+    public ModelAndView saveOrUpdate(User user) {
         //System.out.println("id="+ user.getId() + ",name=" + user.getName());
-        if(user.getId() == null){
+        if (user.getId() == null) {
             userDao.save(user);
-        }else{
+        } else {
             userDao.update(user);
         }
         return new ModelAndView("redirect:/user/list");
     }
 
     @RequestMapping("/user/list")
-    public ModelAndView list(){
+    public ModelAndView list() {
         List<User> list = userDao.findAll();
-        return new ModelAndView("/jsp/user/list","list",list);
+        return new ModelAndView("/jsp/user/list", "list", list);
     }
 
-    @RequestMapping(value="/user/update/{id}",method = RequestMethod.GET)
-    public ModelAndView update(@PathVariable Integer id){
+    @RequestMapping(value = "/user/update/{id}", method = RequestMethod.GET)
+    public ModelAndView update(@PathVariable Integer id) {
         User user = userDao.findById(id);
-        return new ModelAndView("/jsp/user/add","user",user);
+        return new ModelAndView("/jsp/user/add", "user", user);
     }
 
-    @RequestMapping(value="/user/add",method = RequestMethod.GET)
-    public ModelAndView add(){
+    @RequestMapping(value = "/user/add", method = RequestMethod.GET)
+    public ModelAndView add() {
         return new ModelAndView("/jsp/user/add");
     }
 
-    @RequestMapping(value="/user/delete/{id}",method = RequestMethod.GET)
-    public ModelAndView delete(@PathVariable Integer id){
+    @RequestMapping(value = "/user/delete/{id}", method = RequestMethod.GET)
+    public ModelAndView delete(@PathVariable Integer id) {
         //System.out.println("id="+ user.getId() + ",name=" + user.getName());
         User user = userDao.findById(id);
         userDao.delete(user);
@@ -64,8 +64,8 @@ public class UserController {
     }
 
     @RequestMapping(value = "user/view/{id}", method = RequestMethod.GET)
-    public ModelAndView view(@PathVariable Integer id){
+    public ModelAndView view(@PathVariable Integer id) {
         User user = userDao.findById(id);
-        return new ModelAndView("/jsp/user/view","user",user);
+        return new ModelAndView("/jsp/user/view", "user", user);
     }
 }

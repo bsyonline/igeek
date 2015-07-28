@@ -17,19 +17,19 @@ public class HibernateUtil {
 
     private static SessionFactory sessionFactory;
 
-    static{
+    static {
         try {
             sessionFactory = new Configuration().configure("config/hibernate/hibernate.cfg.xml").buildSessionFactory();
-        }catch (Throwable e){
+        } catch (Throwable e) {
             throw new ExceptionInInitializerError(e);
         }
     }
 
-    public static SessionFactory getSessionFactory(){
+    public static SessionFactory getSessionFactory() {
         return sessionFactory;
     }
 
-    public static void shutdown(){
+    public static void shutdown() {
         getSessionFactory().close();
     }
 }

@@ -35,7 +35,7 @@ public class ChordSearchQuery {
     private List<Chord> searchResult;
     public static final String SEARCH_CHORD_INDEX_DIR = "/igeek/home/search/chord";
 
-    public ChordSearchQuery(){
+    public ChordSearchQuery() {
     }
 
     protected IndexSearcher getSearcher(Directory directory) throws IOException {
@@ -43,9 +43,9 @@ public class ChordSearchQuery {
         return searcher;
     }
 
-    public void searchDocuments(int offset, int rowsToReturn){
+    public void searchDocuments(int offset, int rowsToReturn) {
         if ((searchString == null || searchString.equals(""))) {
-            return ;
+            return;
         }
 
         BooleanQuery query = new BooleanQuery();
@@ -69,13 +69,13 @@ public class ChordSearchQuery {
 
             hitCount = hits.totalHits;
             searchResult = getChords(searcher, hits, offset, rowsToReturn);
-        }catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     private List<Chord> getChords(IndexSearcher searcher, TopFieldDocs postHits,
-                                   int offset, int rowsToReturn) throws IOException {
+                                  int offset, int rowsToReturn) throws IOException {
         if (offset < 0) {
             throw new IllegalArgumentException("The offset < 0 is not allowed.");
         }
@@ -104,10 +104,10 @@ public class ChordSearchQuery {
     private Query getChordNameAndDescQuery() throws ParseException {
         Analyzer analyzer = ChordIndexer.getAnalyzer();
         BooleanQuery postTitleAndTextQuery = new BooleanQuery();
-        Query postTitleQuery = new QueryParser(Version.LUCENE_29,ChordIndexer.CHORD_NAME, analyzer).parse(searchString);
+        Query postTitleQuery = new QueryParser(Version.LUCENE_29, ChordIndexer.CHORD_NAME, analyzer).parse(searchString);
         postTitleAndTextQuery.add(postTitleQuery, BooleanClause.Occur.SHOULD);
 
-        Query postTextQuery = new QueryParser(Version.LUCENE_29,ChordIndexer.CHORD_DESC, analyzer).parse(searchString);
+        Query postTextQuery = new QueryParser(Version.LUCENE_29, ChordIndexer.CHORD_DESC, analyzer).parse(searchString);
         postTitleAndTextQuery.add(postTextQuery, BooleanClause.Occur.SHOULD);
 
         return postTitleAndTextQuery;

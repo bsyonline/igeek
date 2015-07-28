@@ -18,25 +18,25 @@ import java.util.List;
  * version: 1.0
  */
 @Repository
-public class CategoryDao extends BaseDao{
+public class CategoryDao extends BaseDao {
 
-    public void save(Category category){
+    public void save(Category category) {
         getHibernateTemplate().save(category);
     }
 
-    public void update(Category category){
+    public void update(Category category) {
         getHibernateTemplate().update(category);
     }
 
-    public void delete(Category category){
+    public void delete(Category category) {
         getHibernateTemplate().delete(category);
     }
 
-    public Category findById(int id){
-        return getHibernateTemplate().get(Category.class,id);
+    public Category findById(int id) {
+        return getHibernateTemplate().get(Category.class, id);
     }
 
-    public List<Category> findAll(){
+    public List<Category> findAll() {
         return getHibernateTemplate().find("from Category c");
     }
 }

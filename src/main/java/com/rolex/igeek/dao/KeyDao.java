@@ -18,24 +18,25 @@ import java.util.List;
  * version: 1.0
  */
 @Repository
-public class KeyDao extends BaseDao{
+public class KeyDao extends BaseDao {
 
-    public void save(Key key){
+    public void save(Key key) {
         getHibernateTemplate().save(key);
     }
 
-    public Key findById(int id){
-        return getHibernateTemplate().get(Key.class,id);
+    public Key findById(int id) {
+        return getHibernateTemplate().get(Key.class, id);
     }
-    public void update(Key key){
+
+    public void update(Key key) {
         getHibernateTemplate().update(key);
     }
 
-    public void delete(Key key){
+    public void delete(Key key) {
         getHibernateTemplate().delete(key);
     }
 
-    public List<Key> findAll(){
+    public List<Key> findAll() {
         return getHibernateTemplate().find("from Key k");
     }
 }

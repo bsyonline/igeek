@@ -26,7 +26,7 @@ public class Score implements Serializable {
     private int pageCount;
     private String memo;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL,mappedBy = "score")
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "score")
     private List<ScorePage> pages;
 
     public Integer getId() {

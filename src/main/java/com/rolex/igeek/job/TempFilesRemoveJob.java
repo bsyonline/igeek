@@ -12,7 +12,7 @@ package com.rolex.igeek.job;
  */
 public class TempFilesRemoveJob {
 
-    public void removeTempFiles(){
+    public void removeTempFiles() {
         System.out.println("job start:");
     }
 }

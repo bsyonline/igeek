@@ -18,7 +18,7 @@ public class ChordIndexTask extends TimerTask {
 
     private Chord chord;
     private int operation;
-    public static final int OPERATION_ADD    = 0;
+    public static final int OPERATION_ADD = 0;
     public static final int OPERATION_UPDATE = 1;
     public static final int OPERATION_DELETE = 2;
     public static final int OPERATION_REBUILD = 3;

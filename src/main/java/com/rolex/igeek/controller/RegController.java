@@ -37,16 +37,16 @@ public class RegController {
     private JavaMailSender mailSender;
 
     @RequestMapping("/signIn")
-    public ModelAndView signIn(User user){
+    public ModelAndView signIn(User user) {
         user.setPassword(MD5.encrypt(user.getPassword()));
         userDao.save(user);
         MimeMessage mimeMessage = mailSender.createMimeMessage();
         try {
-            MimeMessageHelper helper = new MimeMessageHelper(mimeMessage,true);
+            MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
             helper.setTo(user.getEmail());
             helper.setFrom("151251771@qq.com");
             helper.setSubject("igeek");
-            helper.setText("<html><head></head><body>Dear "+user.getUsername()+",<br>Thank for register igeek,please click <a href='#'>here</a> to activate.<br>igeek.</body></html>",true);
+            helper.setText("<html><head></head><body>Dear " + user.getUsername() + ",<br>Thank for register igeek,please click <a href='#'>here</a> to activate.<br>igeek.</body></html>", true);
             mailSender.send(mimeMessage);
         } catch (MessagingException e) {
             e.printStackTrace();
@@ -55,12 +55,12 @@ public class RegController {
     }
 
     @RequestMapping("/reg")
-    public ModelAndView reg(){
+    public ModelAndView reg() {
         return new ModelAndView("forward:/jsp/reg.jsp");
     }
 
     @RequestMapping("/activate")
-    public ModelAndView activate(){
+    public ModelAndView activate() {
         return new ModelAndView("forward:/jsp/login.jsp");
     }
 }

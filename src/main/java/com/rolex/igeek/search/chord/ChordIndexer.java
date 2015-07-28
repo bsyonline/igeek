@@ -62,7 +62,6 @@ public class ChordIndexer {
 
     /**
      * 安排添加chord的任务
-     *
      */
     public static void scheduleRebuildChordIndexTask() {
         // 创建一个添加chord的任务
@@ -112,17 +111,17 @@ public class ChordIndexer {
      *
      * @param chord
      */
-    public static void addChordToIndex(Chord chord){
+    public static void addChordToIndex(Chord chord) {
         Directory directory = null;
         IndexWriter indexWriter = null;
 
         File file = new File(SEARCH_CHORD_INDEX_DIR);
-        if(!file.exists()){
+        if (!file.exists()) {
             file.mkdir();
         }
         try {
             directory = FSDirectory.open(file);
-            indexWriter = getIndexWriter(directory,false);
+            indexWriter = getIndexWriter(directory, false);
             if (indexWriter == null) {
                 log.warn("Cannot get the IndexWriter");
                 return;
@@ -131,7 +130,7 @@ public class ChordIndexer {
 
             long now = System.currentTimeMillis();
             long timeFromLastOptimize = now - lastOptimizeTime;
-            if(SAVE_ON_DISK && timeFromLastOptimize > HOUR){
+            if (SAVE_ON_DISK && timeFromLastOptimize > HOUR) {
                 indexWriter.optimize();
                 lastOptimizeTime = now;
             }
@@ -139,14 +138,14 @@ public class ChordIndexer {
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
-            if(indexWriter != null){
+            if (indexWriter != null) {
                 try {
                     indexWriter.close();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
-            if(directory != null){
+            if (directory != null) {
                 try {
                     directory.close();
                 } catch (IOException e) {
@@ -156,7 +155,7 @@ public class ChordIndexer {
         }
     }
 
-    public static void rebuildIndex(){
+    public static void rebuildIndex() {
         isRebuilding = true;
         int maxChordId = 0;
         long start = System.currentTimeMillis();
@@ -172,7 +171,6 @@ public class ChordIndexer {
             // if new posts are added, then other task will take care it
 
 
-
             if (maxChordId <= 0) {
                 maxChordId = ServiceFactory.getChordDao().findMaxId();
             }
@@ -186,7 +184,7 @@ public class ChordIndexer {
 
                 Collection chords = ServiceFactory.getChordDao().findRange(fromId, toId);
 
-                for (Iterator iter = chords.iterator(); iter.hasNext();) {
+                for (Iterator iter = chords.iterator(); iter.hasNext(); ) {
                     Chord chord = (Chord) iter.next();
                     ChordIndexer.doIndexChord(chord, writer);
                     count++;
@@ -215,21 +213,21 @@ public class ChordIndexer {
                 }
             }
         }
-        log.info("RebuildPostIndexTask took "  + (System.currentTimeMillis() - start) + " ms");
+        log.info("RebuildPostIndexTask took " + (System.currentTimeMillis() - start) + " ms");
         isRebuilding = false;
     }
 
-    public static void deleteChordFromIndex(int id){
+    public static void deleteChordFromIndex(int id) {
         Directory directory = null;
         IndexReader indexReader = null;
         try {
             directory = FSDirectory.open(new File(SEARCH_CHORD_INDEX_DIR));
-            indexReader = IndexReader.open(directory,false);
+            indexReader = IndexReader.open(directory, false);
             Term term = new Term(CHORD_ID, String.valueOf(id));
             indexReader.deleteDocuments(term);
         } catch (IOException e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             if (indexReader != null) {
                 try {
                     indexReader.close();
@@ -237,7 +235,7 @@ public class ChordIndexer {
                     e.printStackTrace();
                 }
             }
-            if(directory != null){
+            if (directory != null) {
                 try {
                     directory.close();
                 } catch (IOException e) {
@@ -258,15 +256,15 @@ public class ChordIndexer {
     static IndexWriter getIndexWriter(Directory directory, boolean create) {
         IndexWriter indexWriter = null;
 
-        if(create == false){
+        if (create == false) {
             try {
-                indexWriter = new IndexWriter(directory,analyzer, false, IndexWriter.MaxFieldLength.LIMITED);
+                indexWriter = new IndexWriter(directory, analyzer, false, IndexWriter.MaxFieldLength.LIMITED);
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }else{
+        } else {
             File file = new File(SEARCH_CHORD_INDEX_DIR);
-            if(!file.exists()){
+            if (!file.exists()) {
                 file.mkdir();
             }
             try {
@@ -276,9 +274,9 @@ public class ChordIndexer {
                 e.printStackTrace();
             }
         }
-        if(SAVE_ON_DISK){
+        if (SAVE_ON_DISK) {
             indexWriter.setUseCompoundFile(true);
-        }else{
+        } else {
             indexWriter.setUseCompoundFile(false);
         }
 
@@ -286,11 +284,11 @@ public class ChordIndexer {
     }
 
     static void doIndexChord(Chord chord, IndexWriter indexWriter) {
-        if(chord == null){
-            return ;
+        if (chord == null) {
+            return;
         }
-        if((chord.getName() == null || "".equals(chord.getName())) || (chord.getDesc() == null || "".equals(chord.getDesc()))){
-            return ;
+        if ((chord.getName() == null || "".equals(chord.getName())) || (chord.getDesc() == null || "".equals(chord.getDesc()))) {
+            return;
         }
         Document document = new Document();
         document.add(new Field(CHORD_ID, Integer.toString(chord.getId()), Field.Store.YES, Field.Index.NOT_ANALYZED));

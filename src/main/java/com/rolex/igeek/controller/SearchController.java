@@ -27,12 +27,12 @@ public class SearchController {
     private ChordSearchQuery chordSearchQuery;
 
     @RequestMapping("/search")
-    public ModelAndView search(String searchString){
+    public ModelAndView search(String searchString) {
         chordSearchQuery.setSearchString(searchString);
         chordSearchQuery.searchDocuments(0, 10);
         List<Chord> list = chordSearchQuery.getSearchResult();
         System.out.println("searchString = " + searchString);
-        for(Chord c : list){
+        for (Chord c : list) {
             System.out.println("name = " + c.getName() + "\tdesc = " + c.getDesc());
         }
 
@@ -40,7 +40,7 @@ public class SearchController {
     }
 
     @RequestMapping("/rebuildChordIndex")
-    public ModelAndView rebuildChordIndex(){
+    public ModelAndView rebuildChordIndex() {
         ChordIndexer.scheduleRebuildChordIndexTask();
         return null;
     }

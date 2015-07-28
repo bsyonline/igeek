@@ -15,7 +15,7 @@ import java.util.Comparator;
  */
 @Entity
 @Table(name = "sys_menu")
-public class Menu implements Comparable{
+public class Menu implements Comparable {
 
     @Id
     @GeneratedValue
@@ -23,7 +23,7 @@ public class Menu implements Comparable{
     String title;
     String url;
     String icon;
-    @Column(name="`menu_order`")
+    @Column(name = "`menu_order`")
     Integer order;
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "pid", nullable = true, insertable = false, updatable = false)
@@ -79,6 +79,6 @@ public class Menu implements Comparable{
 
     @Override
     public int compareTo(Object o) {
-        return this.order-((Menu)o).order;
+        return this.order - ((Menu) o).order;
     }
 }

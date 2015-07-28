@@ -19,41 +19,41 @@ import java.util.List;
  * version: 1.0
  */
 @Repository
-public class ChordDao extends BaseDao{
+public class ChordDao extends BaseDao {
 
-    public void save(Chord chord){
+    public void save(Chord chord) {
         getHibernateTemplate().save(chord);
     }
 
-    public Chord findById(int id){
-        return getHibernateTemplate().get(Chord.class,id);
+    public Chord findById(int id) {
+        return getHibernateTemplate().get(Chord.class, id);
     }
 
-    public List<Chord> findAll(){
+    public List<Chord> findAll() {
         return getHibernateTemplate().find("from Chord c");
     }
 
-    public void update(Chord chord){
+    public void update(Chord chord) {
         getHibernateTemplate().update(chord);
     }
 
-    public void delete(Chord chord){
+    public void delete(Chord chord) {
         getHibernateTemplate().delete(chord);
     }
 
     public Integer findMaxId() {
         Session session = getHibernateTemplate().getSessionFactory().openSession();
         Query query = session.createSQLQuery("select max(id) from igeek_chord");
-        return (Integer)query.uniqueResult();
+        return (Integer) query.uniqueResult();
     }
 
-    public List<Chord> findRange(Integer from, Integer to){
+    public List<Chord> findRange(Integer from, Integer to) {
         if (from < 0) {
             throw new IllegalArgumentException("The fromID < 0 is not allowed.");
         }
         if (to < from) {
             throw new IllegalArgumentException("toID < fromID is not allowed.");
         }
-        return getHibernateTemplate().find("from Chord c where c.id>=" + from + " and c.id <= " + to + " order by c.id asc " );
+        return getHibernateTemplate().find("from Chord c where c.id>=" + from + " and c.id <= " + to + " order by c.id asc ");
     }
 }
