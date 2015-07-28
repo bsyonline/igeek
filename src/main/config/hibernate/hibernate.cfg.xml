@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+
+    <session-factory>
+
+        <!-- 各属性的配置-->
+        <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="connection.url">jdbc:mysql:///test</property>
+        <property name="connection.username">root</property>
+        <property name="connection.password">123456</property>
+        <property name="hbm2ddl.auto">create</property>
+        <property name="connection.autocommit">false</property>
+        <!-- 为true表示将Hibernate发送给数据库的sql显示出来 -->
+
+        <property name="show_sql">true</property>
+
+        <!-- SQL方言，这边设定的是MySQL -->
+
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+
+        <!-- 一次读的数据库记录数 -->
+
+        <property name="hibernate.fetch_size">50</property>
+
+        <!-- 设定对数据库进行批量删除 -->
+        <property name="hibernate.batch_size">30</property>
+
+
+
+        <!-- 映射文件 -->
+
+        <!--<mapping class="com.rolex.igeek.po.Video"/>
+        <mapping class="com.rolex.igeek.po.Audio"/>
+        <mapping class="com.rolex.igeek.po.Chord"/>
+        <mapping class="com.rolex.igeek.po.Sang"/>
+        <mapping class="com.rolex.igeek.po.Score"/>
+        <mapping class="com.rolex.igeek.po.ScorePage"/>
+        <mapping class="com.rolex.igeek.po.Category"/>
+        <mapping class="com.rolex.igeek.po.Key"/>-->
+
+        <mapping class="com.rolex.Category"/>
+        <mapping class="com.rolex.Product" />
+        <mapping class="com.rolex.Teacher" />
+        <mapping class="com.rolex.Student" />
+    </session-factory>
+</hibernate-configuration>
