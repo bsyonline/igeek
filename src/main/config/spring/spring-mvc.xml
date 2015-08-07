@@ -20,6 +20,22 @@
     <mvc:resources mapping="/html/**" location="/html/"/>
     <mvc:resources mapping="/upload/**" location="/upload/"/>
 
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/chord/**"/>
+            <mvc:mapping path="/user/**"/>
+            <mvc:mapping path="/category/**"/>
+            <mvc:mapping path="/key/**"/>
+            <mvc:mapping path="/score/**"/>
+            <mvc:mapping path="/search/*"/>
+            <mvc:mapping path="/session"/>
+            <mvc:mapping path="/signIn"/>
+            <mvc:mapping path="/activate"/>
+            <bean class="com.rolex.interceptor.LogInterceptor"/>
+        </mvc:interceptor>
+
+    </mvc:interceptors>
+
     <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/"></property>
         <property name="suffix" value=".jsp"></property>
