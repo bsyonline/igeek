@@ -85,8 +85,64 @@
 	</fieldset>
 
 
+	<style>
+		.recommend{
+			width:100%;
+			height:100px;
+			margin-top: 20px;
+			border: solid #e5e5e5 1px;
+			text-align: center;
+		}
+		.recommend-item{
+			float:left;
+			width: 90px;
+			height: 90px;
+			margin: 5px;
+			border: solid #e5e5e5 1px;
+		}
+	</style>
+
+
+	<div class="recommend">
+		<div class="recommend-item">
+			<img src=""/>
+		</div>
+		<div class="recommend-item">
+			<img src=""/>
+		</div>
+		<div class="recommend-item">
+			<img src=""/>
+		</div>
+		<div class="recommend-item">
+			<img src=""/>
+		</div>
+		<div class="recommend-item">
+			<img src=""/>
+		</div>
+		<div class="recommend-item">
+			<img src=""/>
+		</div>
+		<div class="recommend-item">
+			<img src=""/>
+		</div>
+		<div class="recommend-item">
+			<img src=""/>
+		</div>
+		<div class="recommend-item">
+			<img src=""/>
+		</div>
+		<div class="recommend-item">
+			<img src=""/>
+		</div>
+	</div>
 <script>
 	function doUpdate(arg){
 		$("#content-wrapper").empty().load("${pageContext.request.contextPath}/chord/update/"+arg);
+	}
+
+	function recommend(){
+		$.post("",{},function(){
+
+		})
 	}
 </script>

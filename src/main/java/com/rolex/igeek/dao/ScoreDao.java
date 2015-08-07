@@ -6,10 +6,14 @@ package com.rolex.igeek.dao;
 
 import com.rolex.common.BaseDao;
 import com.rolex.igeek.po.Score;
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
+import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.stereotype.Repository;
 
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -55,5 +59,18 @@ public class ScoreDao extends BaseDao {
             throw new IllegalArgumentException("toID < fromID is not allowed.");
         }
         return getHibernateTemplate().find("from Score c where c.id>=" + from + " and c.id <= " + to + " order by c.id asc ");
+    }
+
+    public List<Score> recommend(){
+        List<Score> list =  null;
+        list = getHibernateTemplate().executeFind(new HibernateCallback<Object>() {
+            @Override
+            public Object doInHibernate(Session session) throws HibernateException, SQLException {
+                String sql = "select * from igeek_chord i,(select  distinct a.oid,count(distinct a.oid) from sys_log a,sys_log b where a.user_id=b.user_id and b.oid=10 and b.op_obj='chord' and a.op_obj=b.op_obj group by a.oid order by count(a.oid) desc) c where i.id=c.oid";
+                SQLQuery query = session.createSQLQuery("");
+                return query.list();
+            }
+        });
+        return list;
     }
 }
