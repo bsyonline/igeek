@@ -23,7 +23,7 @@ public class Score implements Serializable {
     @GeneratedValue
     private Integer id;
     private String name;
-    private int pageCount;
+    private Integer pageCount;
     private String memo;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "score")
@@ -53,11 +53,11 @@ public class Score implements Serializable {
         this.pages = pages;
     }
 
-    public int getPageCount() {
+    public Integer getPageCount() {
         return pageCount;
     }
 
-    public void setPageCount(int pageCount) {
+    public void setPageCount(Integer pageCount) {
         this.pageCount = pageCount;
     }
 

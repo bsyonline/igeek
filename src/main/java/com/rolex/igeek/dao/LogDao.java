@@ -21,7 +21,7 @@ import java.util.Date;
 public class LogDao extends BaseDao {
 
     public void log(User user, String ip, String obj, String op, Integer id, String memo) {
-        executeBySql("insert into sys_log (user_id,ip,username,op_time,op,op_obj,oid,memo) values (?,?,?,?,?,?,?,?)",
+        executeBySql("insert into sys_log (user_id,ip,username,op_time,op,op_obj,op_id,memo) values (?,?,?,?,?,?,?,?)",
                 new Object[]{user.getId(), ip, user.getUsername(), new Date(), op, obj, id, memo});
     }
 }

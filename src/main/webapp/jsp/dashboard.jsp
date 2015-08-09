@@ -106,7 +106,7 @@
             </ul>
           </li>
           <li><a href="#" title=""><img src="${pageContext.request.contextPath}/images/icons/topnav/settings.png" alt="" /><span>Settings</span></a></li>
-          <li><a href="login.html" title=""><img src="${pageContext.request.contextPath}/images/icons/topnav/logout.png" alt="" /><span>Logout</span></a></li>
+          <li><a href="${pageContext.request.contextPath}/logout" title=""><img src="${pageContext.request.contextPath}/images/icons/topnav/logout.png" alt="" /><span>Logout</span></a></li>
         </ul>
       </div>
       <div class="clear"></div>

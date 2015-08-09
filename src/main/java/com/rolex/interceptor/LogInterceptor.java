@@ -6,6 +6,7 @@ package com.rolex.interceptor;
 
 import com.rolex.igeek.controller.CategoryController;
 import com.rolex.igeek.controller.LoginController;
+import com.rolex.igeek.controller.LogoutController;
 import com.rolex.igeek.dao.CategoryDao;
 import com.rolex.igeek.dao.LogDao;
 import com.rolex.igeek.po.Category;
@@ -47,6 +48,8 @@ public class LogInterceptor implements HandlerInterceptor{
         Object obj = ((HandlerMethod)o).getBean();
         if(obj instanceof LoginController){
             logDao.log(user, ip, null, "login", null, "登录");
+        }else if(obj instanceof LogoutController){
+            logDao.log(user, ip, null, "login", null, "登出");
         }else if(path.contains("/view/")){
             String[] str = path.split("/");
             logDao.log(user, ip, str[1], str[2], Integer.parseInt(str[3]), "查看"+str[1]);

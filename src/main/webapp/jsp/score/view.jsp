@@ -11,7 +11,6 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/plugins/forms/jquery.validationEngine-en.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/plugins/forms/jquery.validationEngine.js"></script>
-
 <style>
 	.formRight{
 		padding-top: 5px;
@@ -50,7 +49,16 @@
 			<div class="formRow">
 				<label><spring:message code="label.score.pages" text="Score Pages"/>:</label>
 				<div class="formRight">
-					${score.pages}
+					<c:forEach items="${score.pages}" var="p">
+						<div style="width: 90%;margin: 5px 0;">
+							${p.name}
+						</div>
+						<div style="max-width: 1000px;">
+							<a target="_blank" href="${pageContext.request.contextPath}/${p.path}">
+								<img src="${pageContext.request.contextPath}/${p.path}" style="max-width: 500px;"/>
+							</a>
+						</div>
+					</c:forEach>
 				</div>
 				<div class="clear"></div>
 			</div>
@@ -68,6 +76,7 @@
 
 
 <script>
+
 	function doUpdate(arg){
 		$("#content-wrapper").empty().load("${pageContext.request.contextPath}/score/update/"+arg);
 	}

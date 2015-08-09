@@ -62,12 +62,13 @@ public class ScoreDao extends BaseDao {
     }
 
     public List<Score> recommend(){
+
         List<Score> list =  null;
         list = getHibernateTemplate().executeFind(new HibernateCallback<Object>() {
             @Override
             public Object doInHibernate(Session session) throws HibernateException, SQLException {
-                String sql = "select * from igeek_chord i,(select  distinct a.oid,count(distinct a.oid) from sys_log a,sys_log b where a.user_id=b.user_id and b.oid=10 and b.op_obj='chord' and a.op_obj=b.op_obj group by a.oid order by count(a.oid) desc) c where i.id=c.oid";
-                SQLQuery query = session.createSQLQuery("");
+                String sql = "select * from igeek_score i,(select a.op_id,count(distinct a.user_id) count from sys_log a,sys_log b where a.user_id=b.user_id and b.op_obj='score' and a.op_obj=b.op_obj group by a.op_id order by count(a.op_id) desc) c where i.id=c.op_id order by count desc";
+                SQLQuery query = session.createSQLQuery(sql);
                 return query.list();
             }
         });
